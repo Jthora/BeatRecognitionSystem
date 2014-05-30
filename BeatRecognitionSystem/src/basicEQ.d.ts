@@ -1,0 +1,5 @@
+declare class webkitAudioContext 
+{
+    constructor();
+}
+

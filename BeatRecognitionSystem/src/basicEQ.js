@@ -61,13 +61,20 @@ var eq;
                 if (_this.beatSprites[channel] == null) {
                     var s;
                     if (channel % 2 == 0)
-                        s = cc.Sprite.create("res/bar_blue.png", cc.rect(0, 0, 40, 2), false);
+                        s = cc.Sprite.create("res/bar_blue_bright.png", cc.rect(0, 0, 40, 2), false);
                     else
-                        s = cc.Sprite.create("res/bar_orange.png", cc.rect(0, 0, 40, 2), false);
+                        s = cc.Sprite.create("res/bar_orange_bright.png", cc.rect(0, 0, 40, 2), false);
                     _this.beatSprites[channel] = s;
                     _this.beatSprites[channel].setPosition(700, (channel * 4) + 150);
                     _this.containerView.addChild(_this.beatSprites[channel]);
+                } else {
+                    if (channel % 2 == 0) {
+                        _this.beatSprites[channel].setTexture("res/bar_blue_bright.png");
+                    } else {
+                        _this.beatSprites[channel].setTexture("res/bar_orange_bright.png");
+                    }
                 }
+                _this.beatSprites[channel].isHit = true;
                 _this.beatSprites[channel].setScaleX(25 * (_this.volumeThresholds[channel] / 256));
             };
             this.cullBeat = function (channel) {
@@ -81,8 +88,17 @@ var eq;
                     _this.beatSprites[channel].setPosition(700, (channel * 4) + 150);
                     _this.containerView.addChild(_this.beatSprites[channel]);
                 }
-                if (_this.beatSprites[channel].getScaleX() > 0.01)
+                if (_this.beatSprites[channel].getScaleX() >= 0.01) {
                     _this.beatSprites[channel].setScaleX(_this.beatSprites[channel].getScaleX() * 0.95);
+                }
+                if (_this.beatSprites[channel].isHit == true) {
+                    _this.beatSprites[channel].isHit = false;
+                    if (channel % 2 == 0) {
+                        _this.beatSprites[channel].setTexture("res/bar_blue.png");
+                    } else {
+                        _this.beatSprites[channel].setTexture("res/bar_orange.png");
+                    }
+                }
             };
             this.containerView = containerView;
 

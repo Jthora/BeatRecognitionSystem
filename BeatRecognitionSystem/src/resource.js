@@ -3,7 +3,9 @@ var res = {
     CloseNormal_png : "res/CloseNormal.png",
     CloseSelected_png : "res/CloseSelected.png",
     BarOrange_png : "res/bar_orange.png",
-    BarBlue_png : "res/bar_blue.png"
+    BarBlue_png : "res/bar_blue.png",
+    BarOrangeBright_png : "res/bar_orange_bright.png",
+    BarBlueBright_png : "res/bar_blue_bright.png"
 };
 
 var g_resources = [
@@ -12,7 +14,9 @@ var g_resources = [
     res.CloseNormal_png,
     res.CloseSelected_png,
     res.BarOrange_png,
-    res.BarBlue_png
+    res.BarBlue_png,
+    res.BarOrangeBright_png,
+    res.BarBlueBright_png
 
     //plist
 

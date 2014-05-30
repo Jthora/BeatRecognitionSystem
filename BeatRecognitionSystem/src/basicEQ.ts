@@ -180,13 +180,25 @@ module eq
 	    	{
 	    		var s:any;
 	    		if(channel % 2 == 0)
-	    			s = cc.Sprite.create("res/bar_blue.png",cc.rect(0,0,40,2),false);
+	    			s = cc.Sprite.create("res/bar_blue_bright.png",cc.rect(0,0,40,2),false);
 	    		else
-	    			s = cc.Sprite.create("res/bar_orange.png",cc.rect(0,0,40,2),false);
+	    			s = cc.Sprite.create("res/bar_orange_bright.png",cc.rect(0,0,40,2),false);
 	    		this.beatSprites[channel] = s;
 	    		this.beatSprites[channel].setPosition(700,(channel*4)+150);
 	    		this.containerView.addChild(this.beatSprites[channel]);
 	    	}
+	    	else
+	    	{
+	    		if(channel % 2 == 0)
+	    		{
+	    			this.beatSprites[channel].setTexture("res/bar_blue_bright.png");
+	    		}
+	    		else
+	    		{
+	    			this.beatSprites[channel].setTexture("res/bar_orange_bright.png");
+	    		}
+	    	}
+	    	this.beatSprites[channel].isHit = true;
 	    	this.beatSprites[channel].setScaleX(25*(this.volumeThresholds[channel]/256));
 	    }
 	    public cullBeat = (channel:number) : void => {
@@ -201,8 +213,22 @@ module eq
 	    		this.beatSprites[channel].setPosition(700,(channel*4)+150);
 	    		this.containerView.addChild(this.beatSprites[channel]);
 	    	}
-	    	if(this.beatSprites[channel].getScaleX() > 0.01)
+	    	if(this.beatSprites[channel].getScaleX() >= 0.01)
+	    	{
 	    		this.beatSprites[channel].setScaleX(this.beatSprites[channel].getScaleX()*0.95);
+	    	}
+	    	if(this.beatSprites[channel].isHit == true)
+	    	{
+	    		this.beatSprites[channel].isHit = false;
+	    		if(channel % 2 == 0)
+	    		{
+	    			this.beatSprites[channel].setTexture("res/bar_blue.png");
+	    		}
+	    		else
+	    		{
+	    			this.beatSprites[channel].setTexture("res/bar_orange.png");
+	    		}
+	    	}
 	    }
 	}
 }
